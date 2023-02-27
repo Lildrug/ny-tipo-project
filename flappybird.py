@@ -13,7 +13,7 @@ korda4=100+korda
 korda5=100+korda2
 korda6=100+korda3
 sc = pygame.display.set_mode((W, H))
-bird=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/pictpnure/bird.png')
+bird=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/bird.png')
 bird_rect=bird.get_rect()
 grass=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/2.png')
 grass=pygame.transform.scale(grass,(grass.get_rect().width*15, grass.get_rect().height//2))
@@ -104,7 +104,7 @@ while True:
         korda6=korda3+1000
         kolonna3_rect.y=korda3
         kolonna6_rect.y=korda6
-    if a==1 and (bir):
+    if a==2 and ((bird_rect.bottom>=924 or bird_rect.y>=0)or bird_rect):
         while True:
             sc.fill(BLACK)
             text2 = f2.render('GOOD GAME BRO', 1, (180, 0, 0))
