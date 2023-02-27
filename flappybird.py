@@ -104,7 +104,7 @@ while True:
         korda6=korda3+1000
         kolonna3_rect.y=korda3
         kolonna6_rect.y=korda6
-    if a==2:
+    if a==1 and (bir):
         while True:
             sc.fill(BLACK)
             text2 = f2.render('GOOD GAME BRO', 1, (180, 0, 0))
