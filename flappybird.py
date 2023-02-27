@@ -13,7 +13,7 @@ korda4=100+korda
 korda5=100+korda2
 korda6=100+korda3
 sc = pygame.display.set_mode((W, H))
-bird=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/bird.png')
+bird=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/pictpnure/bird.png')
 bird_rect=bird.get_rect()
 grass=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/2.png')
 grass=pygame.transform.scale(grass,(grass.get_rect().width*15, grass.get_rect().height//2))
@@ -125,3 +125,4 @@ while True:
     sc.blit(grass,grass_rect)
     clock.tick(FPS)
     pygame.display.update()
+##kadkskds
