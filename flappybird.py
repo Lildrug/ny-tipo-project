@@ -104,7 +104,7 @@ while True:
         korda6=korda3+1000
         kolonna3_rect.y=korda3
         kolonna6_rect.y=korda6
-    if a==2 and ((bird_rect.bottom>=924 or bird_rect.y>=0)or bird_rect):
+    if a==1 and (bird_rect.bottom==grass_rect.top or bird_rect.top==sc_rect.top) or kolonna_rect.collidepoint(bird_rect.topright) or kolonna2_rect.collidepoint(bird_rect.topright) or kolonna3_rect.collidepoint(bird_rect.topright) or kolonna4_rect.collidepoint(bird_rect.topright)  or kolonna5_rect.collidepoint(bird_rect.topright) or kolonna6_rect.collidepoint(bird_rect.topright):
         while True:
             sc.fill(BLACK)
             text2 = f2.render('GOOD GAME BRO', 1, (180, 0, 0))
@@ -113,6 +113,8 @@ while True:
             schore=schore+1
             if schore==1000:
                 exit()
+    if kolonna_rect.x==0 or kolonna2_rect.x==0 or kolonna3_rect.x==0:
+        schore=schore+1
     sc.fill(BLUE)
     sc.blit(kolonna,(kolonna_rect))
     sc.blit(kolonna2,(kolonna2_rect))
@@ -125,6 +127,3 @@ while True:
     sc.blit(grass,grass_rect)
     clock.tick(FPS)
     pygame.display.update()
-##kadkskds
-
-###fgdsfds
