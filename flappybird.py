@@ -14,11 +14,8 @@ korda5=100+korda2
 korda6=100+korda3
 sc = pygame.display.set_mode((W, H))
 bird=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/standart.png')
-bird2=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/izmen.png')
 zxc=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/zxc.jpg')
 bird_rect=bird.get_rect()
-bird2_rect=bird.get_rect()
-bird2_rect=bird_rect
 grass=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/2.png')
 grass=pygame.transform.scale(grass,(grass.get_rect().width*15, grass.get_rect().height//2))
 grass_rect=grass.get_rect()
@@ -31,10 +28,9 @@ kolonna5=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy 
 kolonna6=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/столб.png")
 grass_rect.bottom=sc_rect.bottom
 bird_rect.bottom=grass_rect.top
-fon=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/fon3.jpg')
-fon2=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/fon3.jpg')
+fon=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/fon34.jpg')
+fon2=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/fon34.jpg')
 fon_rect=fon.get_rect()
-fon2_rect=fon.get_rect()
 kolonna_rect=kolonna.get_rect()
 kolonna2_rect=kolonna2.get_rect()
 kolonna3_rect=kolonna3.get_rect()
@@ -44,6 +40,7 @@ kolonna4_rect=kolonna4.get_rect()
 korda=random.randint(-690,0)
 korda2=random.randint(-690,0)
 korda3=random.randint(-690,0)
+korda7=random.randint(-690,0)
 korda4=korda+1000
 korda5=korda2+1000
 korda6=korda3+1000
@@ -60,9 +57,6 @@ kolonna2_rect.x=1500
 kolonna3_rect.x=2000
 kolonna6_rect.x=2000
 fon_rect.x=0
-fon2_rect.x=fon_rect.x+1280
-fon_rect.y=0
-fon2_rect.y=0
 f1 = pygame.font.Font(None, 36)
 f2 = pygame.font.Font(None, 36)
 f3 = pygame.font.Font(None, 36)
@@ -84,8 +78,6 @@ while True:
         elif event.type==pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 move= -jump_force
-                sc.blit(bird2,(bird2_rect))
-                c=1
                 a=1
     if move<=jump_force:
         if bird_rect.bottom+move<grass_rect.top:
@@ -123,6 +115,7 @@ while True:
         korda6=korda3+1000
         kolonna3_rect.y=korda3
         kolonna6_rect.y=korda6
+        c=c+1
     if a==1 and ((bird_rect.bottom==grass_rect.top or bird_rect.top==sc_rect.top) or kolonna_rect.colliderect(bird_rect) or kolonna2_rect.colliderect(bird_rect) or kolonna3_rect.colliderect(bird_rect) or kolonna4_rect.colliderect(bird_rect)  or kolonna5_rect.colliderect(bird_rect) or kolonna6_rect.colliderect(bird_rect)):
         b=1
     if b==1:
@@ -140,6 +133,7 @@ while True:
         pygame.display.update()
         keys = pygame.key.get_pressed()
         if keys[49]:
+            c=0
             schore=0
             a=0
             b=0
@@ -159,22 +153,23 @@ while True:
         if a==0:
             text2 = f2.render('Нажими SPACE для начала игры', 1, (0, 0, 0))
             sc.blit(text2,((W//2)-200,(H//2)))
-        c=c+1
         sc.blit(kolonna,(kolonna_rect))
         sc.blit(kolonna2,(kolonna2_rect))
-        sc.blit(kolonna3,(kolonna3_rect))
         sc.blit(kolonna4,(kolonna4_rect))
-        sc.blit(kolonna5,(kolonna5_rect))
+        if c==3 and c!=0:
+            kolonna3=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/gold.png")
+            kolonna6=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/gold.png")
+        else:
+            kolonna3=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/столб.png")
+            kolonna6=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/столб.png")
+        if c==4:
+            schore=schore+1
+            c=0
+        sc.blit(kolonna3,(kolonna3_rect))
         sc.blit(kolonna6,(kolonna6_rect))
+        sc.blit(kolonna5,(kolonna5_rect))
+        sc.blit(bird,(bird_rect))
         sc.blit(text1, (10, 10))
-        if c>-1 and c<501:
-            sc.blit(bird, bird_rect)
-        if c>=501 and c<1000:
-            sc.blit(bird2, bird2_rect)
-            c=0
-        if c==1000:
-            c=0
-        c=c+1
         sc.blit(grass,grass_rect)
         clock.tick(FPS)
         pygame.display.update()
