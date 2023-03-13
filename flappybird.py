@@ -31,6 +31,7 @@ bird_rect.bottom=grass_rect.top
 fon=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/fon34.jpg')
 fon2=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/fon34.jpg')
 fon_rect=fon.get_rect()
+fon2_rect=fon2.get_rect()
 kolonna_rect=kolonna.get_rect()
 kolonna2_rect=kolonna2.get_rect()
 kolonna3_rect=kolonna3.get_rect()
@@ -57,6 +58,7 @@ kolonna2_rect.x=1500
 kolonna3_rect.x=2000
 kolonna6_rect.x=2000
 fon_rect.x=0
+fon2_rect.x=1920
 f1 = pygame.font.Font(None, 36)
 f2 = pygame.font.Font(None, 36)
 f3 = pygame.font.Font(None, 36)
@@ -68,6 +70,7 @@ clock = pygame.time.Clock()
 schore=0
 b=0
 c=0
+n=5
 maxschore=0
 while True:
     text1 = f1.render('Твой счёт:'+str(schore), 1, (180, 0, 0))
@@ -87,13 +90,19 @@ while True:
         else:
             bird_rect.bottom=grass_rect.top
             move=jump_force+1
+    if fon_rect.x==0:
+        fon2_rect.x=1920
+    if fon2_rect.x==0:
+        fon_rect.x=1920
     if a==1:
-        kolonna5_rect.x-=5
-        kolonna_rect.x-=5
-        kolonna2_rect.x-=5
-        kolonna3_rect.x-=5
-        kolonna4_rect.x-=5
-        kolonna6_rect.x-=5
+        fon_rect.x-=1
+        fon2_rect.x-=1
+        kolonna5_rect.x-=n
+        kolonna_rect.x-=n
+        kolonna2_rect.x-=n
+        kolonna3_rect.x-=n
+        kolonna4_rect.x-=n
+        kolonna6_rect.x-=n
     if kolonna_rect.x<=-100:
         kolonna_rect.x=1500
         kolonna4_rect.x=1500
@@ -150,6 +159,7 @@ while True:
         if kolonna_rect.x==0 or kolonna2_rect.x==0 or kolonna3_rect.x==0:
             schore=schore+1
         sc.blit(fon,(fon_rect))
+        sc.blit(fon2,(fon2_rect))
         if a==0:
             text2 = f2.render('Нажими SPACE для начала игры', 1, (0, 0, 0))
             sc.blit(text2,((W//2)-200,(H//2)))
@@ -165,6 +175,8 @@ while True:
         if c==4:
             schore=schore+1
             c=0
+        #if schore%5==0 and schore!=0:
+        #    n=n+1
         sc.blit(kolonna3,(kolonna3_rect))
         sc.blit(kolonna6,(kolonna6_rect))
         sc.blit(kolonna5,(kolonna5_rect))
