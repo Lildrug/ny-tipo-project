@@ -6,6 +6,7 @@ H = 1024
 BLUE = (0, 0, 255)
 BLACK=(0,0,0)
 a=0
+g=0
 korda=random.randint(-690,0)
 korda2=random.randint(-690,0)
 korda3=random.randint(-690,0)
@@ -13,6 +14,12 @@ korda4=100+korda
 korda5=100+korda2
 korda6=100+korda3
 sc = pygame.display.set_mode((W, H))
+gift=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/gift.png')
+gift2=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/gift.png')
+gift3=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/gift.png')
+gift_rect=gift.get_rect()
+gift2_rect=gift2.get_rect()
+gift3_rect=gift3.get_rect()
 bird=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/standart.png')
 zxc=pygame.image.load('/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/zxc.jpg')
 bird_rect=bird.get_rect()
@@ -59,6 +66,12 @@ kolonna3_rect.x=2000
 kolonna6_rect.x=2000
 fon_rect.x=0
 fon2_rect.x=1920
+gift_rect.x=kolonna_rect.x
+gift2_rect.x=kolonna2_rect.x
+gift3_rect.x=kolonna3_rect.x
+gift_rect.y=(kolonna4_rect.y)-200
+gift2_rect.y=(kolonna5_rect.y)-200
+gift3_rect.y=(kolonna6_rect.y)-200
 f1 = pygame.font.Font(None, 36)
 f2 = pygame.font.Font(None, 36)
 f3 = pygame.font.Font(None, 36)
@@ -71,6 +84,8 @@ schore=0
 b=0
 c=0
 n=5
+q=0
+l=0
 maxschore=0
 while True:
     text1 = f1.render('Твой счёт:'+str(schore), 1, (180, 0, 0))
@@ -103,6 +118,12 @@ while True:
         kolonna3_rect.x-=n
         kolonna4_rect.x-=n
         kolonna6_rect.x-=n
+        gift_rect.x=kolonna_rect.x
+        gift2_rect.x=kolonna2_rect.x
+        gift3_rect.x=kolonna3_rect.x
+        gift_rect.y=(kolonna4_rect.y)-200
+        gift2_rect.y=(kolonna5_rect.y)-200
+        gift3_rect.y=(kolonna6_rect.y)-200
     if kolonna_rect.x<=-100:
         kolonna_rect.x=1500
         kolonna4_rect.x=1500
@@ -142,6 +163,9 @@ while True:
         pygame.display.update()
         keys = pygame.key.get_pressed()
         if keys[49]:
+            q=0
+            g=0
+            n=5
             c=0
             schore=0
             a=0
@@ -153,16 +177,42 @@ while True:
             kolonna2_rect.x=1500
             kolonna3_rect.x=2000
             kolonna6_rect.x=2000
+            gift_rect.x=kolonna_rect.x
+            gift2_rect.x=kolonna2_rect.x
+            gift3_rect.x=kolonna3_rect.x
+            gift_rect.y=(kolonna4_rect.y)-200
+            gift2_rect.y=(kolonna5_rect.y)-200
+            gift3_rect.y=(kolonna6_rect.y)-200
         if keys[50]:
             break
     else:
-        if kolonna_rect.x==0 or kolonna2_rect.x==0 or kolonna3_rect.x==0:
+        if gift_rect.colliderect(bird_rect) and (q==3 or q==0):
+            q=1
             schore=schore+1
+        elif gift2_rect.colliderect(bird_rect) and q==1:
+            q=2
+            schore=schore+1
+        elif gift3_rect.colliderect(bird_rect) and q==2:
+            q=3
+            schore=schore+1
+            if c%2==0 and c!=0:
+                n=n+1
+        if c==4 and l==0:
+            schore=schore+1
+            l=1
+        if c==0 and l==1:
+            l=0
         sc.blit(fon,(fon_rect))
         sc.blit(fon2,(fon2_rect))
         if a==0:
             text2 = f2.render('Нажими SPACE для начала игры', 1, (0, 0, 0))
             sc.blit(text2,((W//2)-200,(H//2)))
+        if q!=1:
+            sc.blit(gift,(gift_rect))
+        if q!=2:
+            sc.blit(gift2,(gift2_rect))
+        if q!=3:
+            sc.blit(gift3,(gift3_rect))
         sc.blit(kolonna,(kolonna_rect))
         sc.blit(kolonna2,(kolonna2_rect))
         sc.blit(kolonna4,(kolonna4_rect))
@@ -172,11 +222,6 @@ while True:
         else:
             kolonna3=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/столб.png")
             kolonna6=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/столб.png")
-        if c==4:
-            schore=schore+1
-            c=0
-        #if schore%5==0 and schore!=0:
-        #    n=n+1
         sc.blit(kolonna3,(kolonna3_rect))
         sc.blit(kolonna6,(kolonna6_rect))
         sc.blit(kolonna5,(kolonna5_rect))
