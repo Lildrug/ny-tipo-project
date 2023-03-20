@@ -6,7 +6,6 @@ H = 1024
 BLUE = (0, 0, 255)
 BLACK=(0,0,0)
 a=0
-g=0
 korda=random.randint(-690,0)
 korda2=random.randint(-690,0)
 korda3=random.randint(-690,0)
@@ -87,6 +86,7 @@ n=5
 q=0
 l=0
 maxschore=0
+g=0
 while True:
     text1 = f1.render('Твой счёт:'+str(schore), 1, (180, 0, 0))
     sc.blit(text1, (10, 10))
@@ -124,28 +124,29 @@ while True:
         gift_rect.y=(kolonna4_rect.y)-200
         gift2_rect.y=(kolonna5_rect.y)-200
         gift3_rect.y=(kolonna6_rect.y)-200
-    if kolonna_rect.x<=-100:
-        kolonna_rect.x=1500
-        kolonna4_rect.x=1500
-        korda=random.randint(-690,0)
-        korda4=korda+1000
-        kolonna_rect.y=korda
-        kolonna4_rect.y=korda4
-    if kolonna2_rect.x<=-100:
-        kolonna2_rect.x=1500
-        kolonna5_rect.x=1500
-        korda2=random.randint(-690,0)
-        korda5=korda2+1000  
-        kolonna2_rect.y=korda2
-        kolonna5_rect.y=korda5
-    if kolonna3_rect.x<=-100:
-        kolonna3_rect.x=1500
-        kolonna6_rect.x=1500
-        korda3=random.randint(-690,0)
-        korda6=korda3+1000
-        kolonna3_rect.y=korda3
-        kolonna6_rect.y=korda6
-        c=c+1
+    if g==0:
+        if kolonna_rect.x<=-100:
+            kolonna_rect.x=1500
+            kolonna4_rect.x=1500
+            korda=random.randint(-690,0)
+            korda4=korda+1000
+            kolonna_rect.y=korda
+            kolonna4_rect.y=korda4
+        if kolonna2_rect.x<=-100:
+            kolonna2_rect.x=1500
+            kolonna5_rect.x=1500
+            korda2=random.randint(-690,0)
+            korda5=korda2+1000  
+            kolonna2_rect.y=korda2
+            kolonna5_rect.y=korda5
+        if kolonna3_rect.x<=-100:
+            kolonna3_rect.x=1500
+            kolonna6_rect.x=1500
+            korda3=random.randint(-690,0)
+            korda6=korda3+1000
+            kolonna3_rect.y=korda3
+            kolonna6_rect.y=korda6
+            c=c+1
     if a==1 and ((bird_rect.bottom==grass_rect.top or bird_rect.top==sc_rect.top) or kolonna_rect.colliderect(bird_rect) or kolonna2_rect.colliderect(bird_rect) or kolonna3_rect.colliderect(bird_rect) or kolonna4_rect.colliderect(bird_rect)  or kolonna5_rect.colliderect(bird_rect) or kolonna6_rect.colliderect(bird_rect)):
         b=1
     if b==1:
@@ -160,6 +161,7 @@ while True:
         sc.blit(text1,((W//2)-80, 800))
         sc.blit(text3,(450,100))
         sc.blit(text4,((W//2)-150,175))
+        bird_rect.x=0
         pygame.display.update()
         keys = pygame.key.get_pressed()
         if keys[49]:
@@ -222,6 +224,42 @@ while True:
         else:
             kolonna3=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/столб.png")
             kolonna6=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/столб.png")
+        if schore >11:
+            g=1
+        if g==1:
+            bird_rect.x=924
+            n=-5
+            if kolonna_rect.x>=1024:
+                kolonna_rect.x=-1500
+                kolonna4_rect.x=-1500
+                korda=random.randint(-690,0)
+                korda4=korda+1000
+                kolonna_rect.y=korda
+                kolonna4_rect.y=korda4
+            if kolonna2_rect.x>=1024:
+                kolonna2_rect.x=-1500
+                kolonna5_rect.x=-1500
+                korda2=random.randint(-690,0)
+                korda5=korda2+1000  
+                kolonna2_rect.y=korda2
+                kolonna5_rect.y=korda5
+            if kolonna3_rect.x>=1024:
+                kolonna3_rect.x=-1500
+                kolonna6_rect.x=-1500
+                korda3=random.randint(-690,0)
+                korda6=korda3+1000
+                kolonna3_rect.y=korda3
+                kolonna6_rect.y=korda6
+                c=c+1 
+            if q!=1:
+                sc.blit(gift,(gift_rect))
+            if q!=2:
+                sc.blit(gift2,(gift2_rect))
+            if q!=3:
+                sc.blit(gift3,(gift3_rect))
+        sc.blit(kolonna,(kolonna_rect))
+        sc.blit(kolonna2,(kolonna2_rect))
+        sc.blit(kolonna4,(kolonna4_rect))
         sc.blit(kolonna3,(kolonna3_rect))
         sc.blit(kolonna6,(kolonna6_rect))
         sc.blit(kolonna5,(kolonna5_rect))
