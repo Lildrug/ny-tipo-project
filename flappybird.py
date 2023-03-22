@@ -85,6 +85,7 @@ n=5
 q=0
 l=0
 g=0
+p=1
 maxschore=0
 while True:
     text1 = f1.render('Твой счёт:'+str(schore), 1, (180, 0, 0))
@@ -125,8 +126,9 @@ while True:
         gift3_rect.y=(kolonna6_rect.y)-200
     if schore%17==0 and schore!=0 and g==0:
             bird=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/bird2.png")
+            p=1
             g=1
-            q=2
+            q=0 
             kolonna_rect.x=-800
             kolonna2_rect.x=-200
             kolonna3_rect.x=300
@@ -135,6 +137,7 @@ while True:
             kolonna6_rect.x=300
     if schore%20==0 and schore!=0 and g==1 and schore!=20 :
             bird=pygame.image.load("/home/Sokolov_Kirill/Рабочий стол/flappy bird/picture/standart.png")
+            p=1
             g=0
             q=0
             kolonna_rect.x=1000
@@ -152,6 +155,7 @@ while True:
             korda=random.randint(-690,0)
             korda4=korda+1000
             kolonna_rect.y=korda
+            p=1
             kolonna4_rect.y=korda4
         if kolonna2_rect.x<=-100:
             kolonna2_rect.x=1500
@@ -160,6 +164,7 @@ while True:
             korda5=korda2+1000  
             kolonna2_rect.y=korda2
             kolonna5_rect.y=korda5
+            p=1
         if kolonna3_rect.x<=-100:
             kolonna3_rect.x=1500
             kolonna6_rect.x=1500
@@ -167,6 +172,7 @@ while True:
             korda6=korda3+1000
             kolonna3_rect.y=korda3
             kolonna6_rect.y=korda6
+            p=1
             c=c+1
     elif g==1:
         bird_rect.x=1180
@@ -178,6 +184,7 @@ while True:
             korda4=korda+1000
             kolonna_rect.y=korda
             kolonna4_rect.y=korda4
+            p=1
         elif kolonna2_rect.x>=1280:
             kolonna2_rect.x=-300
             kolonna5_rect.x=-300
@@ -185,6 +192,7 @@ while True:
             korda5=korda2+1000  
             kolonna2_rect.y=korda2
             kolonna5_rect.y=korda5
+            p=1
         elif kolonna3_rect.x>=1280:
             kolonna3_rect.x=-300
             kolonna6_rect.x=-300
@@ -192,6 +200,7 @@ while True:
             korda6=korda3+1000
             kolonna3_rect.y=korda3
             kolonna6_rect.y=korda6
+            p=1
             c=c+1 
     #if a==1 and ((bird_rect.bottom==grass_rect.top or bird_rect.top==sc_rect.top) or kolonna_rect.colliderect(bird_rect) or kolonna2_rect.colliderect(bird_rect) or kolonna3_rect.colliderect(bird_rect) or kolonna4_rect.colliderect(bird_rect)  or kolonna5_rect.colliderect(bird_rect) or kolonna6_rect.colliderect(bird_rect)):
         #b=1
@@ -212,6 +221,7 @@ while True:
         pygame.display.update()
         keys = pygame.key.get_pressed()
         if keys[49]:
+            p=1
             q=0
             g=0
             n=5
@@ -235,17 +245,23 @@ while True:
         if keys[50]:
             break
     else:
-        if gift_rect.colliderect(bird_rect) and (q==3 or q==0):
+        if gift_rect.colliderect(bird_rect):
             q=1
-            schore=schore+1
-        elif gift2_rect.colliderect(bird_rect) and q==1:
+            if p==1:
+                schore=schore+1
+                p=0
+        elif gift2_rect.colliderect(bird_rect):
             q=2
-            schore=schore+1
-        elif gift3_rect.colliderect(bird_rect) and q==2:
+            if p==1:
+                schore=schore+1
+                p=0
+        elif gift3_rect.colliderect(bird_rect):
             q=3
-            schore=schore+1
-            if c%2==0 and c!=0:
-                n=n+1
+            if p==1:
+                schore=schore+1
+                p=0
+        if c%2==0 and c!=0:
+            n=n+1
         if c==4 and l==0:
             schore=schore+1
             l=1
