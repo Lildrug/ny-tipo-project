@@ -202,8 +202,8 @@ while True:
             kolonna6_rect.y=korda6
             p=1
             c=c+1 
-    #if a==1 and ((bird_rect.bottom==grass_rect.top or bird_rect.top==sc_rect.top) or kolonna_rect.colliderect(bird_rect) or kolonna2_rect.colliderect(bird_rect) or kolonna3_rect.colliderect(bird_rect) or kolonna4_rect.colliderect(bird_rect)  or kolonna5_rect.colliderect(bird_rect) or kolonna6_rect.colliderect(bird_rect)):
-        #b=1
+    if a==1 and ((bird_rect.bottom==grass_rect.top or bird_rect.top==sc_rect.top) or kolonna_rect.colliderect(bird_rect) or kolonna2_rect.colliderect(bird_rect) or kolonna3_rect.colliderect(bird_rect) or kolonna4_rect.colliderect(bird_rect)  or kolonna5_rect.colliderect(bird_rect) or kolonna6_rect.colliderect(bird_rect)):
+        b=1
     if b==1:
         sc.fill(BLACK)
         if schore>maxschore:
